@@ -15,7 +15,11 @@ public class MyClasspathXmlApplicationContext extends ClassPathXmlApplicationCon
 
 	@Override
 	protected void initPropertySources() {
+		//这个类对ClassPathXmlApplicationContext进行增强
+		//环境变量中,添加一个属性name
 		getEnvironment().setRequiredProperties("name");
+		//校验这个属性,
+		getEnvironment().validateRequiredProperties();
 		super.initPropertySources();
 	}
 

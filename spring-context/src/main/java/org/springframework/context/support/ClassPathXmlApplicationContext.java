@@ -140,6 +140,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 			throws BeansException {
 
 		// 1.如果已经有 ApplicationContext 并需要配置成父子关系，那么调用这个构造方法
+		//初始化一些变量,refresh会用到
 		super(parent);
 		// 2.根据提供的路径，处理成配置文件数组(以分号、逗号、空格、tab、换行符分割)
 		setConfigLocations(configLocations);

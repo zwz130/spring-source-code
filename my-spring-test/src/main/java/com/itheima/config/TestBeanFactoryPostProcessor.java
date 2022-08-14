@@ -11,6 +11,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 
 public class TestBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
+	//方式一
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		BeanDefinition testBean = beanFactory.getBeanDefinition("testBean");

@@ -448,6 +448,7 @@ public class BeanDefinitionParserDelegate {
 
 		//  2.解析bean定义，根据 <bean ...>...</bean> 中的配置创建 BeanDefinition，然后把配置中的信息都设置到实例中,
 		//  xml解析成beanDefinition   ===>
+		//开始解析xml中的bean定义
 		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
 
 		// 到这里，整个 <bean /> 标签就算解析结束了，一个 BeanDefinition 就形成了。

@@ -537,11 +537,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			// Tell the subclass to refresh the internal bean factory.
 			/*
+			   重点方法!!!
 			   【2. 初始化 新BeanFactory】重点！
 			      （1）如果存在旧 BeanFactory，则销毁
 			      （2）创建新的 BeanFactory（DefaluListbaleBeanFactory）
 			      （3）解析xml/加载 Bean 定义、注册 Bean定义到beanFactory(不初始化)
 			      （4）返回新的 BeanFactory（DefaluListbaleBeanFactory）
+			      还会将bean定义,加载到BeanDefinition中
 			 */
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
@@ -716,6 +718,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// 实现了 Aware 接口的 beans 在初始化的时候，这个 processor 负责回调，
 		// 这个我们很常用，如我们会为了获取 ApplicationContext 而 implement ApplicationContextAware
 		// 注意：它不仅仅回调 ApplicationContextAware，还会负责回调 EnvironmentAware、ResourceLoaderAware 等
+		//重点!!!
 		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 
 		//忽略依赖接口

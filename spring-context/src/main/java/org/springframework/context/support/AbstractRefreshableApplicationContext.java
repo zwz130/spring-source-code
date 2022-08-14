@@ -120,6 +120,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
 		// 1.判断是否已经存在 BeanFactory，如果存在则先销毁、关闭该 BeanFactory
+		//
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
@@ -129,7 +130,24 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			// 设置标识，用于 BeanFactory 的序列化
 			beanFactory.setSerializationId(getId());
-			// 设置 BeanFactory 的两个配置属性：（1）是否允许 Bean 覆盖 （2）是否允许循环引用
+			// 设置 BeanFactory 的两个配置属性：allowBeanDefinitionOverriding 和 allowCircularReferences
+			/*
+			*  这两个属性,属性1,
+			* 		假如一个xml配置文件中,有两个<bean>的id相同,启动的时候是 会报错的
+			* 		如果是2个配置文件中,定义了相同名字的bean,是否会报错就会根据allowBeanDefinitionOverriding这个属性
+			* 		来决定,如果是true,就不会报错,第二个bean会把第一个覆盖掉,如果是false,不允许覆盖,但是如果有两个bean
+			* 		的name相同,就会抛出异常
+			*	属性2,
+			* 	是否允许有循环引用(循环依赖),就是userservice和Orderservice的相互引用
+			* 默认是true,就是允许有这种情况发生,
+			* 有了这个情况,spring就会尝试解决循环依赖
+			* 如果手动设置为false,一旦发生这种情况,就会报错,而不是尝试去解决循环依赖
+			*
+			*
+			*
+			* */
+			// （1）是否允许 Bean 覆盖
+			// （2）是否允许循环引用
 			customizeBeanFactory(beanFactory);
 
 			/*

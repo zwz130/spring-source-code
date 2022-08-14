@@ -11,6 +11,7 @@ import org.springframework.core.Ordered;
 
 public class TestBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor{
 
+	//方式二
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		BeanDefinition testBean = beanFactory.getBeanDefinition("testBean");
